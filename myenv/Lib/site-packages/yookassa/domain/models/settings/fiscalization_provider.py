@@ -1,0 +1,31 @@
+# coding: utf-8
+
+class FiscalizationProvider(object):
+    """Наименование провайдера фискализации."""  # noqa: E501
+
+    ATOL = "atol"
+    """АТОЛ Онлайн"""
+    BUSINESS_RU = "business_ru"
+    """Бизнес.ру"""
+    SHTRIH_M = "shtrih_m"
+    """Orange Data"""
+    MODUL_KASSA = "modul_kassa"
+    """МодульКасса"""
+    EVOTOR = "evotor"
+    """Эвотор"""
+    KIT_INVEST = "kit_invest"
+    """Кит Инвест"""
+    A_QSI = "a_qsi"
+    """aQsi online"""
+    FNS = "fns"
+    """Чеки для самозанятых"""
+    AVANPOST = "avanpost"
+    """54-ФЗ: Чеки от ЮKassa"""
+    MERTRADE = "mertrade"
+    """Mertrade"""
+    FIRST_OFD = "first_ofd"
+    """Первый ОФД"""
+    LIFE_PAY = "life_pay"
+    """LIFE PAY"""
+    ROCKET = "rocket"
+    """RocketR"""
