@@ -1,8 +1,14 @@
+# Base
+import os
+
 # Async
 import asyncpg
 
 # UUID generation for referral links
 import uuid
+
+# Dotenv
+from dotenv import load_dotenv
 
 # Date
 import datetime
@@ -10,10 +16,17 @@ from datetime import datetime, timedelta
 import pytz
 
 
+load_dotenv()
+
+user = os.getenv("USER")
+password = os.getenv("PASSWORD")
+database = os.getenv("DATABASE")
+
+
 # function to connect to the database
 async def connect_to_db():
     return await asyncpg.connect(
-        user="postgres", password="123456", database="parsechat_bot", host="localhost"
+        user=user, password=password, database=database, host="localhost"
     )
 
 
@@ -140,7 +153,7 @@ async def get_user_role(user_id):
 
 async def grant_premium_role(user_id, price):
     conn = await connect_to_db()
-    
+
     # Определение времени, на которое продлевается подписка
     if price == 579:
         additional_time = timedelta(days=1)
@@ -148,8 +161,10 @@ async def grant_premium_role(user_id, price):
         additional_time = timedelta(weeks=1)
 
     # Получение текущего времени истечения подписки
-    result = await conn.fetchrow("SELECT premium_expiration FROM users WHERE user_id = $1", user_id)
-    current_expiration = result['premium_expiration']
+    result = await conn.fetchrow(
+        "SELECT premium_expiration FROM users WHERE user_id = $1", user_id
+    )
+    current_expiration = result["premium_expiration"]
 
     # Приведение текущего времени истечения подписки к UTC, если оно не является aware
     if current_expiration and current_expiration.tzinfo is None:
